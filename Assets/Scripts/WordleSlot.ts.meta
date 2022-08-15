@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 4ea71f041a6d19b4aa14a8a2c048d740
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    WordleSlot extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n}\r\nexports.default
+    = WordleSlot;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiV29yZGxlU2xvdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIldvcmRsZVNsb3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFFQSxpREFBcUQ7QUFHckQsTUFBcUIsVUFBVyxTQUFRLHFDQUFxQjtDQUk1RDtBQUpELDZCQUlDIn0=","assetPath":"Assets/Scripts/WordleSlot.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"Button","type":"UnityEngine.UI.Button","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"Unity.TextMeshPro","name":"Text","type":"TMPro.TextMeshProUGUI","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"Image","type":"UnityEngine.UI.Image","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"WordleSlot","description":""},"isCompiled":true}'
+  typescriptHash: 8d3d9bf4403b31a7b7b2c7fad1020330

@@ -1,0 +1,135 @@
+fileFormatVersion: 2
+guid: 9dbeb6f5982fe244591ad97f7a603999
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    Data_1 = require(\"./Data\");\r\nconst Main_1 = require(\"./Main\");\r\nconst
+    Data_2 = require(\"./Data\");\r\nconst WordleSlot_1 = require(\"./WordleSlot\");\r\nconst
+    WordleKey_1 = require(\"./WordleKey\");\r\nconst UnityEngine = require(\"UnityEngine\");\r\nclass
+    WordleView extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Update() {\r\n       
+    this.prevWordleState = this.curWordleState;\r\n        this.curWordleState =
+    Main_1.default.instance.wordleModel.state;\r\n        this.CheckForWinState();\r\n       
+    this.CheckForFailState();\r\n    }\r\n    CheckForWinState() {\r\n        if
+    (this.curWordleState === Data_1.WordleState.END_SUCCESS && this.prevWordleState
+    !== Data_1.WordleState.END_SUCCESS) {\r\n            UnityEngine_1.Debug.LogError(\"You
+    Just Won!!!!!\");\r\n            this.StartCoroutine(this.DoRoutine());\r\n       
+    }\r\n    }\r\n    CheckForFailState() {\r\n        if (this.curWordleState ===
+    Data_1.WordleState.END_FAIL && this.prevWordleState !== Data_1.WordleState.END_FAIL)
+    {\r\n            UnityEngine_1.Debug.LogError(\"You Just Lost!!!!!\");\r\n           
+    this.StartCoroutine(this.DoRoutine());\r\n        }\r\n    }\r\n    *DoRoutine()
+    {\r\n        while (true) {\r\n            yield new UnityEngine.WaitForSeconds(1);\r\n           
+    UnityEngine_1.Debug.LogError(\"Co Routine Run\");\r\n            this.StopAllCoroutines();\r\n           
+    Main_1.default.instance.wordleModel.SetDefaults();\r\n            this.ResetWordleSlots();\r\n       
+    }\r\n    }\r\n    ResetWordleSlots() {\r\n        for (let col = 0; col < Data_1.Constants.WORD_ROWS;
+    col++) {\r\n            for (let row = 0; row < Data_1.Constants.WORD_LETTER_COUNT;
+    row++) {\r\n                this.WordleSlots[col][row].Text.text = \"\";\r\n               
+    this.WordleSlots[col][row].Image.color = UnityEngine_1.Color.cyan;\r\n           
+    }\r\n        }\r\n        for (let i = 0; i < this.WordleKeys.length; i++) {\r\n           
+    this.WordleKeys[i].Image.color = UnityEngine_1.Color.cyan;\r\n            this.WordleKeys[i].HasExactMatch
+    = false;\r\n        }\r\n    }\r\n    Start() {\r\n        this.WordleKeys =
+    [];\r\n        this.prevWordleState = Data_1.WordleState.NONE;\r\n        this.curWordleState
+    = Data_1.WordleState.NONE;\r\n        this.WordleSlots = [];\r\n        const
+    wordRows = Main_1.default.instance.wordleModel.wordleArray;\r\n        for (let
+    row = 0; row < wordRows.length; row++) {\r\n            const word = Main_1.default.instance.wordleModel.wordleArray[row];\r\n           
+    let wordSlots = [];\r\n            const myGO = UnityEngine_1.GameObject.Instantiate(this.WordRowTemplate);\r\n           
+    myGO.transform.SetParent(this.WordRowTemplate.transform.parent.transform);\r\n           
+    myGO.transform.localScale = new UnityEngine_1.Vector3(1, 1, 1);\r\n           
+    myGO.SetActive(true);\r\n            for (let col = 0; col < word.length; col++)
+    {\r\n                const mySlot = UnityEngine_1.GameObject.Instantiate(this.slotTemplate);\r\n               
+    mySlot.transform.SetParent(myGO.transform);\r\n                mySlot.transform.localScale
+    = new UnityEngine_1.Vector3(1, 1, 1);\r\n                mySlot.SetActive(true);\r\n               
+    let mySlotScript = mySlot.GetComponent($typeof(WordleSlot_1.default));\r\n               
+    mySlotScript.Text.text = Main_1.default.instance.wordleModel.wordleArray[row][col];\r\n               
+    wordSlots.push(mySlotScript);\r\n            }\r\n            this.WordleSlots.push(wordSlots);\r\n       
+    }\r\n        for (let i = 0; i < 10; i++) {\r\n            this.keyTemplateLetter.text
+    = Data_2.KeyboardLetters[i];\r\n            const myGO = UnityEngine_1.GameObject.Instantiate(this.keyTemplate);\r\n           
+    myGO.transform.SetParent(this.keysParentRow1.transform);\r\n            myGO.transform.localScale
+    = new UnityEngine_1.Vector3(1, 1, 1);\r\n            myGO.SetActive(true);\r\n           
+    const wordleKey = myGO.GetComponent($typeof(WordleKey_1.default));\r\n           
+    this.WordleKeys.push(wordleKey);\r\n            myGO.GetComponent($typeof(UnityEngine_UI_1.Button)).onClick.AddListener(()
+    => { this.ClickOnKeyboard(Data_2.KeyboardLetters[i]); });\r\n        }\r\n       
+    for (let i = 10; i < 19; i++) {\r\n            this.keyTemplateLetter.text =
+    Data_2.KeyboardLetters[i];\r\n            const myGO = UnityEngine_1.GameObject.Instantiate(this.keyTemplate);\r\n           
+    myGO.transform.SetParent(this.keysParentRow2.transform);\r\n            myGO.transform.localScale
+    = new UnityEngine_1.Vector3(1, 1, 1);\r\n            myGO.SetActive(true);\r\n           
+    const wordleKey = myGO.GetComponent($typeof(WordleKey_1.default));\r\n           
+    this.WordleKeys.push(wordleKey);\r\n            myGO.GetComponent($typeof(UnityEngine_UI_1.Button)).onClick.AddListener(()
+    => { this.ClickOnKeyboard(Data_2.KeyboardLetters[i]); });\r\n        }\r\n       
+    for (let i = 19; i < 27; i++) {\r\n            this.keyTemplateLetter.text =
+    Data_2.KeyboardLetters[i];\r\n            const myGO = UnityEngine_1.GameObject.Instantiate(this.keyTemplate);\r\n           
+    myGO.transform.SetParent(this.keysParentRow3.transform);\r\n            myGO.transform.localScale
+    = new UnityEngine_1.Vector3(1, 1, 1);\r\n            myGO.SetActive(true);\r\n           
+    const wordleKey = myGO.GetComponent($typeof(WordleKey_1.default));\r\n           
+    this.WordleKeys.push(wordleKey);\r\n            myGO.GetComponent($typeof(UnityEngine_UI_1.Button)).onClick.AddListener(()
+    => { this.ClickOnKeyboard(Data_2.KeyboardLetters[i]); });\r\n        }\r\n       
+    this.ResetWordleSlots();\r\n        this.deleteKey.onClick.AddListener(() =>
+    { this.Delete(); });\r\n        this.submitKey.onClick.AddListener(() => { this.Submit();
+    });\r\n        this.slotTemplate.SetActive(false);\r\n    }\r\n    ClickOnKeyboard(key)
+    {\r\n        const rowIndex = Main_1.default.instance.wordleModel.currentWordRowIndex;\r\n       
+    const colIndex = Main_1.default.instance.wordleModel.currentWordColIndex;\r\n       
+    Main_1.default.instance.wordleModel.LetterEntered(key);\r\n        if (colIndex
+    < Data_1.Constants.WORD_LETTER_COUNT) {\r\n            this.WordleSlots[rowIndex][colIndex].Text.text
+    = Main_1.default.instance.wordleModel.wordleArray[rowIndex][colIndex];\r\n       
+    }\r\n    }\r\n    Delete() {\r\n        if (Main_1.default.instance.wordleModel.state
+    === Data_1.WordleState.END_SUCCESS || Main_1.default.instance.wordleModel.state
+    === Data_1.WordleState.END_FAIL)\r\n            return;\r\n        const rowIndex
+    = Main_1.default.instance.wordleModel.currentWordRowIndex;\r\n        const colIndex
+    = Main_1.default.instance.wordleModel.currentWordColIndex;\r\n        Main_1.default.instance.wordleModel.Delete();\r\n       
+    if (colIndex > 0) {\r\n            this.WordleSlots[rowIndex][colIndex - 1].Text.text
+    = \"\";\r\n        }\r\n    }\r\n    Submit() {\r\n        if (Main_1.default.instance.wordleModel.state
+    === Data_1.WordleState.END_SUCCESS || Main_1.default.instance.wordleModel.state
+    === Data_1.WordleState.END_FAIL)\r\n            return;\r\n        const rowIndex
+    = Main_1.default.instance.wordleModel.currentWordRowIndex;\r\n        const colIndex
+    = Main_1.default.instance.wordleModel.currentWordColIndex;\r\n        let wordToEval
+    = \"\";\r\n        let isMissingLetters = false;\r\n        for (let i = 0; i
+    < Data_1.Constants.WORD_LETTER_COUNT; i++) {\r\n            UnityEngine_1.Debug.LogError(Main_1.default.instance.wordleModel.wordleArray[rowIndex][i]);\r\n           
+    wordToEval += Main_1.default.instance.wordleModel.wordleArray[rowIndex][i];\r\n           
+    if (Main_1.default.instance.wordleModel.wordleArray[rowIndex][i] === \"\") {\r\n               
+    isMissingLetters = true;\r\n            }\r\n        }\r\n        if (isMissingLetters
+    === true) {\r\n            UnityEngine_1.Debug.LogError(\"can not submit incomplete
+    word!!!\");\r\n            return;\r\n        }\r\n        else {\r\n           
+    UnityEngine_1.Debug.LogError(wordToEval);\r\n        }\r\n        if (Main_1.default.instance.wordleModel.TrySubmit())
+    {\r\n            this.ColorWordBlocks(rowIndex);\r\n            //this.ColorKeys();\r\n       
+    }\r\n    }\r\n    ColorWordBlocks(rowIndex) {\r\n        const wordToCompare
+    = Main_1.default.instance.wordleModel.WordToMatch;\r\n        for (let i = 0;
+    i < Data_1.Constants.WORD_LETTER_COUNT; i++) {\r\n            const letter =
+    this.WordleSlots[rowIndex][i].Text.text;\r\n            if (letter.toLowerCase()
+    === wordToCompare[i]) {\r\n                UnityEngine_1.Debug.LogError(\"match\");\r\n               
+    this.WordleSlots[rowIndex][i].Image.color = UnityEngine_1.Color.green;\r\n               
+    for (let j = 0; j < this.WordleKeys.length; j++) {\r\n                    if
+    (this.WordleKeys[j].Text.text.toLowerCase() === letter.toLowerCase()) {\r\n                       
+    this.WordleKeys[j].Image.color = UnityEngine_1.Color.green;\r\n                       
+    this.WordleKeys[j].HasExactMatch = true;\r\n                    }\r\n               
+    }\r\n            }\r\n            else if (wordToCompare.includes(letter.toLowerCase()))
+    {\r\n                this.WordleSlots[rowIndex][i].Image.color = UnityEngine_1.Color.yellow;\r\n               
+    for (let j = 0; j < this.WordleKeys.length; j++) {\r\n                    if
+    (this.WordleKeys[j].Text.text.toLowerCase() === letter.toLowerCase()) {\r\n                       
+    UnityEngine_1.Debug.LogError(this.WordleKeys[j].Image.color);\r\n                       
+    if (this.WordleKeys[j].HasExactMatch != true) {\r\n                           
+    this.WordleKeys[j].Image.color = UnityEngine_1.Color.yellow;\r\n                       
+    }\r\n                    }\r\n                }\r\n            }\r\n           
+    else {\r\n                this.WordleSlots[rowIndex][i].Image.color = UnityEngine_1.Color.gray;\r\n               
+    for (let j = 0; j < this.WordleKeys.length; j++) {\r\n                    if
+    (this.WordleKeys[j].Text.text.toLowerCase() === letter.toLowerCase()) {\r\n                       
+    this.WordleKeys[j].Image.color = UnityEngine_1.Color.grey;\r\n                   
+    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\nexports.default
+    = WordleView;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiV29yZGxlVmlldy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIldvcmRsZVZpZXcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSw2Q0FBK0Y7QUFDL0YsbURBQXFEO0FBRXJELGlEQUFxRDtBQUNyRCxpQ0FBZ0Q7QUFDaEQsaUNBQXlCO0FBQ3pCLGlDQUF5QztBQUN6Qyw2Q0FBc0M7QUFDdEMsMkNBQW9DO0FBQ3BDLDJDQUEyQztBQUUzQyxNQUFxQixVQUFXLFNBQVEscUNBQXFCO0lBcUJ6RCxNQUFNO1FBQ0YsSUFBSSxDQUFDLGVBQWUsR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDO1FBQzNDLElBQUksQ0FBQyxjQUFjLEdBQUcsY0FBSSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsS0FBSyxDQUFDO1FBRXRELElBQUksQ0FBQyxnQkFBZ0IsRUFBRSxDQUFDO1FBQ3hCLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxDQUFDO0lBQzdCLENBQUM7SUFFTyxnQkFBZ0I7UUFDcEIsSUFBSSxJQUFJLENBQUMsY0FBYyxLQUFLLGtCQUFXLENBQUMsV0FBVyxJQUFJLElBQUksQ0FBQyxlQUFlLEtBQUssa0JBQVcsQ0FBQyxXQUFXLEVBQUU7WUFDckcsbUJBQUssQ0FBQyxRQUFRLENBQUMsbUJBQW1CLENBQUMsQ0FBQztZQUNwQyxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDO1NBQ3pDO0lBQ0wsQ0FBQztJQUVPLGlCQUFpQjtRQUNyQixJQUFJLElBQUksQ0FBQyxjQUFjLEtBQUssa0JBQVcsQ0FBQyxRQUFRLElBQUksSUFBSSxDQUFDLGVBQWUsS0FBSyxrQkFBVyxDQUFDLFFBQVEsRUFBRTtZQUMvRixtQkFBSyxDQUFDLFFBQVEsQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDO1lBQ3JDLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDLENBQUM7U0FDekM7SUFDTCxDQUFDO0lBRU8sQ0FB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","assetPath":"Assets/Scripts/WordleView.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"keyboardKeys","type":"UnityEngine.UI.Button[]","isArray":true,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"slotTemplate","type":"UnityEngine.GameObject","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"keyTemplate","type":"UnityEngine.GameObject","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"Unity.TextMeshPro","name":"keyTemplateLetter","type":"TMPro.TextMeshProUGUI","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"deleteKey","type":"UnityEngine.UI.Button","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"submitKey","type":"UnityEngine.UI.Button","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"test","type":"UnityEngine.UI.Button","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"keysParentRow1","type":"UnityEngine.GameObject","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"keysParentRow2","type":"UnityEngine.GameObject","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"keysParentRow3","type":"UnityEngine.GameObject","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"WordleSlots","type":"any","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"WordleKeys","type":"C:/Users/mondu/Projects/Zepeto/Wordle/Assets/Scripts/WordleKey.default","isArray":true,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"WordRowTemplate","type":"UnityEngine.GameObject","isArray":false,"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"prevWordleState","type":"WordleState","isArray":false,"enumKeys":["NONE","INIT","PLAYING","END_SUCCESS","END_FAIL"],"enumValues":["0","1","2","3","4"],"attributes":[]},{"assembly":"","name":"curWordleState","type":"WordleState","isArray":false,"enumKeys":["NONE","INIT","PLAYING","END_SUCCESS","END_FAIL"],"enumValues":["0","1","2","3","4"],"attributes":[]}],"name":"WordleView","description":""},"isCompiled":true}'
+  typescriptHash: b8fdeaf6c52be5c3dd14c0578f75cc3a

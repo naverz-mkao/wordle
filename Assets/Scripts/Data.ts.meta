@@ -1,0 +1,36 @@
+fileFormatVersion: 2
+guid: 6a82d63ce84570b48b635581ed45a790
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.LetterState = exports.WordleState = exports.Constants
+    = exports.KeyboardLetters = void 0;\r\nexports.KeyboardLetters = [\"Q\", \"W\",
+    \"E\", \"R\", \"T\", \"Y\", \"U\", \"I\", \"O\", \"P\", \"A\", \"S\", \"D\",
+    \"F\", \"G\", \"H\", \"J\", \"K\", \"L\", \"Z\", \"X\", \"C\", \"V\", \"B\",
+    \"N\", \"M\"];\r\nclass Constants {\r\n}\r\nexports.Constants = Constants;\r\nConstants.WORD_ROWS
+    = 6;\r\nConstants.WORD_LETTER_COUNT = 5;\r\nvar WordleState;\r\n(function (WordleState)
+    {\r\n    WordleState[WordleState[\"NONE\"] = 0] = \"NONE\";\r\n    WordleState[WordleState[\"INIT\"]
+    = 1] = \"INIT\";\r\n    WordleState[WordleState[\"PLAYING\"] = 2] = \"PLAYING\";\r\n   
+    WordleState[WordleState[\"END_SUCCESS\"] = 3] = \"END_SUCCESS\";\r\n    WordleState[WordleState[\"END_FAIL\"]
+    = 4] = \"END_FAIL\";\r\n})(WordleState = exports.WordleState || (exports.WordleState
+    = {}));\r\nvar LetterState;\r\n(function (LetterState) {\r\n    LetterState[LetterState[\"NONE\"]
+    = 0] = \"NONE\";\r\n    LetterState[LetterState[\"EXACT_MATCH\"] = 1] = \"EXACT_MATCH\";\r\n   
+    LetterState[LetterState[\"IN_WORD_MATCH\"] = 2] = \"IN_WORD_MATCH\";\r\n})(LetterState
+    = exports.LetterState || (exports.LetterState = {}));\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRGF0YS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkRhdGEudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQWEsUUFBQSxlQUFlLEdBQUcsQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxDQUFDLENBQUE7QUFFakssTUFBYSxTQUFTOztBQUF0Qiw4QkFHQztBQUZVLG1CQUFTLEdBQUcsQ0FBQyxDQUFDO0FBQ2QsMkJBQWlCLEdBQUcsQ0FBQyxDQUFDO0FBR2pDLElBQVksV0FNWDtBQU5ELFdBQVksV0FBVztJQUNuQiw2Q0FBUSxDQUFBO0lBQ1IsNkNBQVEsQ0FBQTtJQUNSLG1EQUFXLENBQUE7SUFDWCwyREFBZSxDQUFBO0lBQ2YscURBQVksQ0FBQTtBQUNoQixDQUFDLEVBTlcsV0FBVyxHQUFYLG1CQUFXLEtBQVgsbUJBQVcsUUFNdEI7QUFFRCxJQUFZLFdBSVg7QUFKRCxXQUFZLFdBQVc7SUFDbkIsNkNBQVEsQ0FBQTtJQUNSLDJEQUFlLENBQUE7SUFDZiwrREFBaUIsQ0FBQTtBQUNyQixDQUFDLEVBSlcsV0FBVyxHQUFYLG1CQUFXLEtBQVgsbUJBQVcsUUFJdEIifQ==","assetPath":"Assets/Scripts/Data.ts","manifest":{"properties":[],"name":"Constants","description":""},"isCompiled":true}'
+  typescriptHash: ac1abc69d8a481e663c17dde868fa247
